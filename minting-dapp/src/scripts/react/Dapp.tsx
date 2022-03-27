@@ -65,12 +65,11 @@ export default class Dapp extends React.Component<Props, State> {
     if (browserProvider?.isMetaMask !== true) {
       this.setError( 
         <>
-          We were not able to detect <strong>MetaMask</strong>. We value <strong>privacy and security</strong> a lot so we limit the wallet options on the DAPP.<br />
+          We were not able to detect <strong>MetaMask</strong>. Please install a MetaMask wallet extension on your browser. 
+          {/* <strong>privacy and security</strong> a lot so we limit the wallet options on the DAPP.<br />
           <br />
-          But don't worry! <span className="emoji">😃</span> You can always interact with the smart-contract through <a href={this.generateContractUrl()} target="_blank">{this.state.networkConfig.blockExplorer.name}</a> and <strong>we do our best to provide you with the best user experience possible</strong>, even from there.<br />
-          <br />
-          You can also get your <strong>Whitelist Proof</strong> manually, using the tool below.
-        </>,
+          But don't worry! <span className="emoji">😃</span> You can always interact with the smart-contract through <a href={this.generateContractUrl()} target="_blank">{this.state.networkConfig.blockExplorer.name}</a> and <strong>we do our best to provide you with the best user experience possible</strong>, even from there.<br /> */}
+        </>
       );
     }
 
@@ -125,21 +124,11 @@ export default class Dapp extends React.Component<Props, State> {
 
     if (merkleProof.length < 1) {
       this.setState({
-        merkleProofManualAddressFeedbackMessage: 'The given address is not in the whitelist, please double-check.',
+        merkleProofManualAddressFeedbackMessage: 'The given address is not whitelisted please double-check.',
       });
 
       return;
     }
-
-    navigator.clipboard.writeText(merkleProof);
-
-    this.setState({
-      merkleProofManualAddressFeedbackMessage: 
-      <>
-        <strong>Congratulations!</strong> <span className="emoji">🎉</span><br />
-        Your Merkle Proof <strong>has been copied to the clipboard</strong>. You can paste it into <a href={this.generateContractUrl()} target="_blank">{this.state.networkConfig.blockExplorer.name}</a> to claim your tokens.
-      </>,
-    });
   }
 
   render() {
@@ -205,25 +194,18 @@ export default class Dapp extends React.Component<Props, State> {
             {!this.isWalletConnected() ? <button className="primary" disabled={this.provider === undefined} onClick={() => this.connectWallet()}>Connect Wallet</button> : null}
             
             <div className="use-block-explorer">
-              Hey, looking for a <strong>super-safe experience</strong>? <span className="emoji">😃</span><br />
-              You can interact with the smart-contract <strong>directly</strong> through <a href={this.generateContractUrl()} target="_blank">{this.state.networkConfig.blockExplorer.name}</a>, without even connecting your wallet to this DAPP! <span className="emoji">🚀</span><br />
-              <br />
-              Keep safe! <span className="emoji">❤️</span>
+              Hey, we're delighted to have <strong>you</strong> here! <span className="emoji">😃</span>
+              <br></br>
+              <br></br>
+              Connect your wallet and get ready to receive your <strong>Scotch Noblemen!</strong> 
+              <br></br>
+              <br></br>
+
+              Check out our smart contract on <a href={this.generateContractUrl()} target="_blank">{this.state.networkConfig.blockExplorer.name}</a>
+              <br></br>
+              Thanks for contributing to the project <span className="emoji">❤️</span>
+              <br/>
             </div>
-
-            {!this.isWalletConnected() || this.state.isWhitelistMintEnabled ?
-              <div className="merkle-proof-manual-address">
-                <h2>Whitelist Proof</h2>
-                <p>
-                  Anyone can generate the proof using any public address in the list, but <strong>only the owner of that address</strong> will be able to make a successful transaction by using it.
-                </p>
-
-                {this.state.merkleProofManualAddressFeedbackMessage ? <div className="feedback-message">{this.state.merkleProofManualAddressFeedbackMessage}</div> : null}
-
-                <label htmlFor="merkle-proof-manual-address">Public address:</label>
-                <input id="merkle-proof-manual-address" type="text" placeholder="0x000..." disabled={this.state.userAddress !== null} value={this.state.userAddress ?? this.state.merkleProofManualAddress} ref={(input) => this.merkleProofManualAddressInput = input!} onChange={() => {this.setState({merkleProofManualAddress: this.merkleProofManualAddressInput.value})}} /> <button onClick={() => this.copyMerkleProofToClipboard()}>Generate and copy to clipboard</button>
-              </div>
-              : null}
           </div>
           : null}
       </>
