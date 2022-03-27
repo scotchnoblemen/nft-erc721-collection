@@ -1,11 +1,11 @@
 import CollectionConfigInterface from '../lib/CollectionConfigInterface';
-import { ethereumTestnet, ethereumMainnet } from '../lib/Networks';
-import { openSea } from '../lib/Marketplaces';
+import * as Networks from '../lib/Networks';
+import * as Marketplaces from '../lib/Marketplaces';
 import whitelistAddresses from './whitelist.json';
 
 const CollectionConfig: CollectionConfigInterface = {
-  testnet: ethereumTestnet,
-  mainnet: ethereumMainnet,
+  testnet: Networks.ethereumTestnet,
+  mainnet: Networks.ethereumMainnet,
   // The contract name can be updated using the following command:
   // yarn rename-contract NEW_CONTRACT_NAME
   // Please DO NOT change it manually!
@@ -23,9 +23,15 @@ const CollectionConfig: CollectionConfigInterface = {
     price: 0.00007,
     maxMintAmountPerTx: 5000,
   },
+<<<<<<< HEAD
   contractAddress: "0xB73DCa104489E49Bb9362C5b9b8015e794AA8641",
   marketplaceIdentifier: 'Scotch Noblemen - Final Test',
   marketplaceConfig: openSea,
+=======
+  contractAddress: null,
+  marketplaceIdentifier: 'my-nft-token',
+  marketplaceConfig: Marketplaces.openSea,
+>>>>>>> bf6680d5b19c1aed38c92933ea837fc13e342d98
   whitelistAddresses: whitelistAddresses,
 };
 
