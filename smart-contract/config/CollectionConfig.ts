@@ -23,15 +23,9 @@ const CollectionConfig: CollectionConfigInterface = {
     price: 0.00007,
     maxMintAmountPerTx: 5000,
   },
-<<<<<<< HEAD
   contractAddress: "0xB73DCa104489E49Bb9362C5b9b8015e794AA8641",
   marketplaceIdentifier: 'Scotch Noblemen - Final Test',
-  marketplaceConfig: openSea,
-=======
-  contractAddress: null,
-  marketplaceIdentifier: 'my-nft-token',
   marketplaceConfig: Marketplaces.openSea,
->>>>>>> bf6680d5b19c1aed38c92933ea837fc13e342d98
   whitelistAddresses: whitelistAddresses,
 };
 
